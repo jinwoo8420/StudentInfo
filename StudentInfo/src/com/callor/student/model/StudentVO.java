@@ -5,17 +5,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentVO {
 	private int stNum;
 	private String name;
+	private String dept;
 	private int grade;
 	private String tel;
+
+	@Override
+	public String toString() {
+		return "학번 : " + stNum + ", 이름 : " + name + ", 학과 : " + dept + ", 학년 : " + grade + ", 전화번호 : " + tel;
+	}
+
 }
