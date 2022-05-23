@@ -1,6 +1,5 @@
 package com.callor.student.service.impl;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +23,15 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void inputStudent() {
+	public void inputStudent() throws IOException {
+		String file = "src/com/callor/student/model/Studentlist.txt";
+
+		FileWriter writer = null;
+		PrintWriter out = null;
+
+		writer = new FileWriter(file, true);
+		out = new PrintWriter(writer);
+
 		while (true) {
 			StudentVO vo = new StudentVO();
 
@@ -43,7 +50,6 @@ public class StudentServiceImpl implements StudentService {
 
 			System.out.print("학년 입력>> ");
 			String stGrade = sc.nextLine();
-//			Integer intGrade = Integer.valueOf(stGrade);
 
 			System.out.print("전화번호 입력>> ");
 			String tel = sc.nextLine();
@@ -55,13 +61,24 @@ public class StudentServiceImpl implements StudentService {
 			vo.setTel(tel);
 
 			sVO.add(vo);
+			
+			out.printf("%s:", vo.getStNum());
+			out.printf("%s:", vo.getName());
+			out.printf("%s:", vo.getDept());
+			out.printf("%s:", vo.getGrade());
+			out.printf("%s\n", vo.getTel());
+			
 		}
+		out.flush();
+		out.close();
+		writer.close();
 
 	}
 
 	@Override
 	public void saveStudent(String fileName) throws IOException {
-		File file = new File("src/com/callor/student/model/Studentlist.txt");
+//		File file = new File("src/com/callor/student/model/Studentlist.txt");
+		String file = "src/com/callor/student/model/Studentlist.txt";
 
 		FileWriter writer = null;
 		PrintWriter out = null;
@@ -69,19 +86,19 @@ public class StudentServiceImpl implements StudentService {
 		writer = new FileWriter(file, true);
 		out = new PrintWriter(writer);
 
-		out.printf("%s:", sVO.get(sVO.size()-1).getStNum());
-		out.printf("%s:", sVO.get(sVO.size()-1).getName());
-		out.printf("%s:", sVO.get(sVO.size()-1).getDept());
-		out.printf("%s:", sVO.get(sVO.size()-1).getGrade());
-		out.printf("%s\n", sVO.get(sVO.size()-1).getTel());
+//		out.printf("%s:", sVO.get(sVO.size()-1).getStNum());
+//		out.printf("%s:", sVO.get(sVO.size()-1).getName());
+//		out.printf("%s:", sVO.get(sVO.size()-1).getDept());
+//		out.printf("%s:", sVO.get(sVO.size()-1).getGrade());
+//		out.printf("%s\n", sVO.get(sVO.size()-1).getTel());
 
-//		for (StudentVO vo : sVO) {
-//			out.printf("%s:", vo.getStNum());
-//			out.printf("%s:", vo.getName());
-//			out.printf("%s:", vo.getDept());
-//			out.printf("%s:", vo.getGrade());
-//			out.printf("%s\n", vo.getTel());
-//		}
+		for (StudentVO vo : sVO) {
+			out.printf("%s:", vo.getStNum());
+			out.printf("%s:", vo.getName());
+			out.printf("%s:", vo.getDept());
+			out.printf("%s:", vo.getGrade());
+			out.printf("%s\n", vo.getTel());
+		}
 
 		out.flush();
 		out.close();

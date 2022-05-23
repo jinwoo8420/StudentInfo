@@ -11,7 +11,7 @@ public class StudentController {
 
 		stService.loadStudent();
 		stService.inputStudent();
-		stService.saveStudent(null);
+//		stService.saveStudent(null);
 		stService.printStudent();
 	}
 
