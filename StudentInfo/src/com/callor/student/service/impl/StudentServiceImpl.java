@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.callor.student.model.StudentVO;
 import com.callor.student.service.StudentService;
+import com.callor.utils.Line;
 
 public class StudentServiceImpl implements StudentService {
 	private Scanner sc;
@@ -34,8 +35,6 @@ public class StudentServiceImpl implements StudentService {
 				break;
 			}
 
-			Integer intNum = Integer.valueOf(stNum);
-
 			System.out.print("이름 입력>> ");
 			String name = sc.nextLine();
 
@@ -44,15 +43,15 @@ public class StudentServiceImpl implements StudentService {
 
 			System.out.print("학년 입력>> ");
 			String stGrade = sc.nextLine();
-			Integer intGrade = Integer.valueOf(stGrade);
+//			Integer intGrade = Integer.valueOf(stGrade);
 
 			System.out.print("전화번호 입력>> ");
 			String tel = sc.nextLine();
 
-			vo.setStNum(intNum);
+			vo.setStNum(stNum);
 			vo.setName(name);
 			vo.setDept(dept);
-			vo.setGrade(intGrade);
+			vo.setGrade(stGrade);
 			vo.setTel(tel);
 
 			sVO.add(vo);
@@ -70,13 +69,19 @@ public class StudentServiceImpl implements StudentService {
 		writer = new FileWriter(file, true);
 		out = new PrintWriter(writer);
 
-		for (StudentVO vo : sVO) {
-			out.printf("%s:", vo.getStNum());
-			out.printf("%s:", vo.getName());
-			out.printf("%s:", vo.getDept());
-			out.printf("%s:", vo.getGrade());
-			out.printf("%s\n", vo.getTel());
-		}
+		out.printf("%s:", sVO.get(sVO.size()-1).getStNum());
+		out.printf("%s:", sVO.get(sVO.size()-1).getName());
+		out.printf("%s:", sVO.get(sVO.size()-1).getDept());
+		out.printf("%s:", sVO.get(sVO.size()-1).getGrade());
+		out.printf("%s\n", sVO.get(sVO.size()-1).getTel());
+
+//		for (StudentVO vo : sVO) {
+//			out.printf("%s:", vo.getStNum());
+//			out.printf("%s:", vo.getName());
+//			out.printf("%s:", vo.getDept());
+//			out.printf("%s:", vo.getGrade());
+//			out.printf("%s\n", vo.getTel());
+//		}
 
 		out.flush();
 		out.close();
@@ -84,7 +89,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void printStudent() throws IOException {
+	public void loadStudent() throws IOException {
 		String fileName = "src/com/callor/student/model/Studentlist.txt";
 
 		InputStream is = new FileInputStream(fileName);
@@ -92,11 +97,36 @@ public class StudentServiceImpl implements StudentService {
 
 		while (scan.hasNext()) {
 			String line = scan.nextLine();
-			System.out.println(line);
+
+			String[] studentInfo = line.split(":");
+
+			String stNum = studentInfo[0];
+			String name = studentInfo[1];
+			String dept = studentInfo[2];
+			String grade = studentInfo[3];
+			String tel = studentInfo[4];
+
+			StudentVO tVO = StudentVO.builder().stNum(stNum).name(name).dept(dept).grade(grade).tel(tel).build();
+
+			sVO.add(tVO);
 		}
 
 		scan.close();
 		is.close();
+
+	}
+
+	@Override
+	public void printStudent() {
+		System.out.println(Line.dLine(100));
+		System.out.println("학번\t이름\t학과\t학년\t전화번호");
+		System.out.println(Line.sLine(100));
+
+		for (int i = 0; i < sVO.size(); i++) {
+			System.out.println(sVO.get(i));
+		}
+
+		System.out.println(Line.dLine(100));
 	}
 
 }

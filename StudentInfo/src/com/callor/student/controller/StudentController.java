@@ -9,6 +9,7 @@ public class StudentController {
 	public static void main(String[] args) throws IOException {
 		StudentServiceImpl stService = new StudentServiceImpl();
 
+		stService.loadStudent();
 		stService.inputStudent();
 		stService.saveStudent(null);
 		stService.printStudent();

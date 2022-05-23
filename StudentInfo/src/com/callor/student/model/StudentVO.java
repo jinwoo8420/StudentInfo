@@ -12,10 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentVO {
-	private int stNum;
+	private String stNum;
 	private String name;
 	private String dept;
-	private int grade;
+	private String grade;
 	private String tel;
 
 	@Override
