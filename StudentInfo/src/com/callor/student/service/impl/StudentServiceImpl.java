@@ -15,8 +15,8 @@ import com.callor.student.service.StudentService;
 import com.callor.utils.Line;
 
 public class StudentServiceImpl implements StudentService {
-	private Scanner sc;
-	private List<StudentVO> sVO;
+	private final Scanner sc;
+	private final List<StudentVO> sVO;
 
 	public StudentServiceImpl() {
 		sc = new Scanner(System.in);
