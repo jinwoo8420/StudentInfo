@@ -71,11 +71,11 @@ public class StudentServiceImpl implements StudentService {
 		out = new PrintWriter(writer);
 
 		for (StudentVO vo : sVO) {
-			out.printf("학번 : %s, ", vo.getStNum());
-			out.printf("이름 : %s, ", vo.getName());
-			out.printf("학과 : %s, ", vo.getDept());
-			out.printf("학년 : %s, ", vo.getGrade());
-			out.printf("전화번호 : %s\n", vo.getTel());
+			out.printf("%s:", vo.getStNum());
+			out.printf("%s:", vo.getName());
+			out.printf("%s:", vo.getDept());
+			out.printf("%s:", vo.getGrade());
+			out.printf("%s\n", vo.getTel());
 		}
 
 		out.flush();
