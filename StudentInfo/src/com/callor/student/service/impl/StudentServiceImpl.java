@@ -86,12 +86,6 @@ public class StudentServiceImpl implements StudentService {
 		writer = new FileWriter(file, true);
 		out = new PrintWriter(writer);
 
-//		out.printf("%s:", sVO.get(sVO.size()-1).getStNum());
-//		out.printf("%s:", sVO.get(sVO.size()-1).getName());
-//		out.printf("%s:", sVO.get(sVO.size()-1).getDept());
-//		out.printf("%s:", sVO.get(sVO.size()-1).getGrade());
-//		out.printf("%s\n", sVO.get(sVO.size()-1).getTel());
-
 		for (StudentVO vo : sVO) {
 			out.printf("%s:", vo.getStNum());
 			out.printf("%s:", vo.getName());
